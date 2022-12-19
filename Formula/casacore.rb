@@ -34,7 +34,7 @@ class Casacore < Formula
       cmake_args.delete "-DCMAKE_BUILD_TYPE=None"
       cmake_args << "-DCMAKE_BUILD_TYPE=#{build_type}"
       cmake_args << "-DBUILD_PYTHON=OFF"
-      cmake_args << "-DBUILD_PYTHON3=#{build.with? "python" ? "ON" : "OFF"}"
+      cmake_args << "-DBUILD_PYTHON3=#{build.with?("python") ? "ON" : "OFF"}"
       cmake_args << "-DUSE_OPENMP=OFF"
       cmake_args << "-DUSE_FFTW3=ON" << "-DFFTW3_ROOT_DIR=#{HOMEBREW_PREFIX}"
       cmake_args << "-DUSE_HDF5=ON" << "-DHDF5_ROOT_DIR=#{HOMEBREW_PREFIX}"
