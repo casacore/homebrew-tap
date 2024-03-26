@@ -1,7 +1,7 @@
 class Casacore < Formula
   desc "Suite of C++ libraries for radio astronomy data processing"
   homepage "https://github.com/casacore/casacore"
-  url "https://github.com/casacore/casacore/archive/v3.4.0.tar.gz"
+  url "https://github.com/casacore/casacore/refs/tags/v3.4.0"
   sha256 "31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1"
   head "https://github.com/casacore/casacore.git"
 
@@ -11,7 +11,7 @@ class Casacore < Formula
   depends_on "casacore-data"
   depends_on "cfitsio"
   depends_on "fftw"
-  depends_on "gcc"  # for gfortran
+  depends_on "gcc" # for gfortran
   depends_on "hdf5"
   depends_on "readline"
   depends_on "wcslib"
