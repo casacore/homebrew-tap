@@ -1,6 +1,6 @@
 class ZtarDownloadStrategy < CurlDownloadStrategy
   def stage(&block)
-    UnpackStrategy::Tar.new(cached_location).extract(basename: basename, verbose: verbose?)
+    UnpackStrategy::Tar.new(cached_location).extract(basename:, verbose: verbose?)
     chdir(&block)
   end
 end
