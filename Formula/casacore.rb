@@ -5,7 +5,7 @@ class Casacore < Formula
   sha256 "63f1c8eff932b0fcbd38c598a5811e6e5397b72835b637d6f426105a183b3f91"
   head "https://github.com/casacore/casacore.git"
 
-  option "with-python", "Build Python bindings"
+  option "without-python", "Build without Python bindings"
 
   depends_on "cmake" => :build
   depends_on "casacore-data"
