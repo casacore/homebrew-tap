@@ -17,6 +17,8 @@ class Casacore < Formula
   depends_on "readline"
   depends_on "wcslib"
 
+  # Apply patches at the end of the formula, in the following order:
+  # 1. casacore/casacore#1350 (should be in next release after 3.5.0)
   patch :DATA
 
   if build.with?("python")
@@ -52,15 +54,14 @@ class Casacore < Formula
 end
 
 __END__
-diff --git a/python/Converters/test/CMakeLists.txt b/python/Converters/test/CMakeLists.txt
-index 32214a8..321c98b 100644
---- a/python/Converters/test/CMakeLists.txt
-+++ b/python/Converters/test/CMakeLists.txt
-@@ -1,6 +1,6 @@
- include_directories ("..")
- add_library(tConvert MODULE tConvert.cc)
- SET_TARGET_PROPERTIES(tConvert PROPERTIES PREFIX "_") 
--target_link_libraries (tConvert casa_python ${PYTHON_LIBRARIES})
-+target_link_libraries (tConvert casa_python)
- add_test (tConvert ${CMAKE_SOURCE_DIR}/cmake/cmake_assay ./tConvert)
- add_dependencies(check tConvert)
+diff --git a/tables/Dysco/tests/testdyscostman.cc b/tables/Dysco/tests/testdyscostman.cc
+index 69da97c..ae52c03 100644
+--- a/tables/Dysco/tests/testdyscostman.cc
++++ b/tables/Dysco/tests/testdyscostman.cc
+@@ -1,5 +1,6 @@
+ #include <boost/test/unit_test.hpp>
+ #include <boost/filesystem/operations.hpp>
++#include <boost/filesystem/directory.hpp>
+ 
+ #include <casacore/tables/Tables/ArrayColumn.h>
+ #include <casacore/tables/Tables/Table.h>
