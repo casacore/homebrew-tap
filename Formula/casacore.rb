@@ -11,7 +11,7 @@ class Casacore < Formula
   depends_on "casacore-data"
   depends_on "cfitsio"
   depends_on "fftw"
-  depends_on "gcc"  # for gfortran
+  depends_on "gcc" # for gfortran
   depends_on "gsl"
   depends_on "hdf5"
   depends_on "readline"
