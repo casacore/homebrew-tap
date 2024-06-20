@@ -8,8 +8,8 @@ end
 class CasacoreData < Formula
   desc "Ephemerides and geodetic data for casacore measures (via Astron)"
   homepage "https://github.com/casacore/casacore"
-  url "ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures_20240325-160001.ztar", using: ZtarDownloadStrategy
-  sha256 "8cd94f300bba7c6776211b579ca88fea1be131c063850d9a9cf9234b8d709ab2"
+  url "ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures_20240611-160001.ztar", using: ZtarDownloadStrategy
+  sha256 "2241bae966986bb7914d589084fb69e4844ef5813d7189eb414370e0583f67d2"
   head "ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar", using: ZtarDownloadStrategy
 
   option "with-casapy", "Use Mac CASA.App (aka casapy) data directory if found"

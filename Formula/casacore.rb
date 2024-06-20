@@ -1,21 +1,24 @@
 class Casacore < Formula
   desc "Suite of C++ libraries for radio astronomy data processing"
   homepage "https://github.com/casacore/casacore"
-  url "https://github.com/casacore/casacore/archive/refs/tags/v3.4.0.tar.gz"
-  sha256 "31f02ad2e26f29bab4a47a2a69e049d7bc511084a0b8263360e6157356f92ae1"
+  url "https://github.com/casacore/casacore/archive/refs/tags/v3.5.0.tar.gz"
+  sha256 "63f1c8eff932b0fcbd38c598a5811e6e5397b72835b637d6f426105a183b3f91"
   head "https://github.com/casacore/casacore.git"
 
-  option "with-python", "Build Python bindings"
+  option "without-python", "Build without Python bindings"
 
   depends_on "cmake" => :build
   depends_on "casacore-data"
   depends_on "cfitsio"
   depends_on "fftw"
   depends_on "gcc" # for gfortran
+  depends_on "gsl"
   depends_on "hdf5"
   depends_on "readline"
   depends_on "wcslib"
 
+  # Apply patches at the end of the formula, in the following order:
+  # 1. casacore/casacore#1350 (should be in next release after 3.5.0)
   patch :DATA
 
   if build.with?("python")
@@ -33,7 +36,6 @@ class Casacore < Formula
       cmake_args = std_cmake_args
       cmake_args.delete "-DCMAKE_BUILD_TYPE=None"
       cmake_args << "-DCMAKE_BUILD_TYPE=#{build_type}"
-      cmake_args << "-DBUILD_PYTHON=OFF"
       cmake_args << "-DBUILD_PYTHON3=#{build.with?("python") ? "ON" : "OFF"}"
       cmake_args << "-DUSE_OPENMP=OFF"
       cmake_args << "-DUSE_FFTW3=ON" << "-DFFTW3_ROOT_DIR=#{HOMEBREW_PREFIX}"
@@ -52,15 +54,14 @@ class Casacore < Formula
 end
 
 __END__
-diff --git a/python/Converters/test/CMakeLists.txt b/python/Converters/test/CMakeLists.txt
-index 32214a8..321c98b 100644
---- a/python/Converters/test/CMakeLists.txt
-+++ b/python/Converters/test/CMakeLists.txt
-@@ -1,6 +1,6 @@
- include_directories ("..")
- add_library(tConvert MODULE tConvert.cc)
- SET_TARGET_PROPERTIES(tConvert PROPERTIES PREFIX "_") 
--target_link_libraries (tConvert casa_python ${PYTHON_LIBRARIES})
-+target_link_libraries (tConvert casa_python)
- add_test (tConvert ${CMAKE_SOURCE_DIR}/cmake/cmake_assay ./tConvert)
- add_dependencies(check tConvert)
+diff --git a/tables/Dysco/tests/testdyscostman.cc b/tables/Dysco/tests/testdyscostman.cc
+index 69da97c..ae52c03 100644
+--- a/tables/Dysco/tests/testdyscostman.cc
++++ b/tables/Dysco/tests/testdyscostman.cc
+@@ -1,5 +1,6 @@
+ #include <boost/test/unit_test.hpp>
+ #include <boost/filesystem/operations.hpp>
++#include <boost/filesystem/directory.hpp>
+ 
+ #include <casacore/tables/Tables/ArrayColumn.h>
+ #include <casacore/tables/Tables/Table.h>
