@@ -14,6 +14,8 @@ class Casacore < Formula
   depends_on "gcc" # for gfortran
   depends_on "gsl"
   depends_on "hdf5"
+  depends_on "ncurses"
+  depends_on "openblas"
   depends_on "readline"
   depends_on "wcslib"
 
