@@ -8,9 +8,9 @@ end
 class CasacoreData < Formula
   desc "Ephemerides and geodetic data for casacore measures (via Astron)"
   homepage "https://github.com/casacore/casacore"
-  url "ftp://anonymous@ftp.astron.nl/outgoing/Measures/WSRT_Measures_20250130-160001.ztar", using: ZtarDownloadStrategy
-  sha256 "c324518025649c2e87fb487a85e2a5791c1f7c04aa6a18f832bff9dffe3cd25c"
-  head "ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar", using: ZtarDownloadStrategy
+  url "https://www.astron.nl/iers/WSRT_Measures_20250409-160001.ztar", using: ZtarDownloadStrategy
+  sha256 "faa94ae553d5b46802f231e0334681ee864c5b34c5830a89f36f8349886af8ea"
+  head "https://www.astron.nl/iers/WSRT_Measures.ztar", using: ZtarDownloadStrategy
 
   option "with-casapy", "Use Mac CASA.App (aka casapy) data directory if found"
 
@@ -39,7 +39,7 @@ class CasacoreData < Formula
     if File.symlink? data_dir
       "Linked to CASA data directory (#{CASAPY_DATA}) from #{data_dir}"
     else
-      "Installed latest Astron WSRT_Measures tarball to #{data_dir}"
+      "Installed latest ASTRON WSRT_Measures tarball to #{data_dir}"
     end
   end
 

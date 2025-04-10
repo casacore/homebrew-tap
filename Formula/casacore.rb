@@ -1,8 +1,8 @@
 class Casacore < Formula
   desc "Suite of C++ libraries for radio astronomy data processing"
   homepage "https://github.com/casacore/casacore"
-  url "https://github.com/casacore/casacore/archive/refs/tags/v3.6.1.tar.gz"
-  sha256 "480d3340fa17e9ba67f18efbaff4bbb272a01d1f400d2295c0b6c86eb7abcf82"
+  url "https://github.com/casacore/casacore/archive/refs/tags/v3.7.1.tar.gz"
+  sha256 "ad7ad865d5d8517524bdde71e0083a69442648b693850660dadb0ce6109d91c7"
   head "https://github.com/casacore/casacore.git"
 
   option "without-python", "Build without Python bindings"
