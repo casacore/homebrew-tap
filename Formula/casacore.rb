@@ -38,8 +38,13 @@ class Casacore < Formula
       cmake_args << "-DUSE_OPENMP=OFF"
       cmake_args << "-DUSE_FFTW3=ON" << "-DFFTW3_ROOT_DIR=#{HOMEBREW_PREFIX}"
       cmake_args << "-DUSE_HDF5=ON" << "-DHDF5_ROOT_DIR=#{HOMEBREW_PREFIX}"
-      cmake_args << "-DBoost_NO_BOOST_CMAKE=True"
       cmake_args << "-DDATA_DIR=#{HOMEBREW_PREFIX / "opt/casacore-data/data"}"
+      if build.with?("python")
+        python_exe = which("python3")
+        cmake_args << "-DPython3_EXECUTABLE=#{python_exe}"
+        numpy_include = `#{python_exe} -c "import numpy; print(numpy.get_include())"`.strip
+        cmake_args << "-DPython3_NumPy_INCLUDE_DIR=#{numpy_include}"
+      end
       system "cmake", "../..", *cmake_args
       system "make", "install"
     end
