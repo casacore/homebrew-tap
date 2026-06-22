@@ -25,6 +25,10 @@ class Casacore < Formula
     depends_on "boost-python3"
   end
 
+  if build.with?("sisco")
+    depends_on "libdeflate"
+  end
+
   def install
     casacore_data = HOMEBREW_PREFIX / "opt/casacore-data/data"
     opoo "casacore data not found at #{casacore_data}" unless casacore_data.exist?
@@ -44,6 +48,9 @@ class Casacore < Formula
         cmake_args << "-DPython3_EXECUTABLE=#{python_exe}"
         numpy_include = `#{python_exe} -c "import numpy; print(numpy.get_include())"`.strip
         cmake_args << "-DPython3_NumPy_INCLUDE_DIR=#{numpy_include}"
+      end
+      if build.with?("sisco")
+        cmake_args << "-DBUILD_SISCO=#{build.with?("sisco") ? "ON" : "OFF"}"
       end
       system "cmake", "../..", *cmake_args
       system "make", "install"
