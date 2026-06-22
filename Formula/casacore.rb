@@ -9,17 +9,19 @@ class Casacore < Formula
   option "with-sisco", "Build with SISCO support"
 
   depends_on "cmake" => :build
+
   depends_on "casacore-data"
   depends_on "cfitsio"
   depends_on "fftw"
   depends_on "gcc" # for gfortran
   depends_on "gsl"
   depends_on "hdf5"
-  depends_on "libdeflate" => :optional
   depends_on "ncurses"
   depends_on "openblas"
   depends_on "readline"
   depends_on "wcslib"
+
+  depends_on "libdeflate" => :optional
 
   if build.with?("python")
     depends_on "python3"
