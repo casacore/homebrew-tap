@@ -6,7 +6,7 @@ class Casacore < Formula
   head "https://github.com/casacore/casacore.git"
 
   option "without-python", "Build without Python bindings"
-  option "with-sisco", "Build with SISCO support"
+  option "without-sisco", "Build without Sisco compression storage manager"
 
   depends_on "cmake" => :build
 
