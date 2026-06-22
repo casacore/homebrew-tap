@@ -27,10 +27,6 @@ class Casacore < Formula
     depends_on "boost-python3"
   end
 
-  if build.with?("sisco")
-    depends_on "libdeflate"
-  end
-
   def install
     casacore_data = HOMEBREW_PREFIX / "opt/casacore-data/data"
     opoo "casacore data not found at #{casacore_data}" unless casacore_data.exist?
