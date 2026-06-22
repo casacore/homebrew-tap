@@ -15,6 +15,7 @@ class Casacore < Formula
   depends_on "gcc" # for gfortran
   depends_on "gsl"
   depends_on "hdf5"
+  depends_on "libdeflate" => :optional
   depends_on "ncurses"
   depends_on "openblas"
   depends_on "readline"
@@ -50,9 +51,7 @@ class Casacore < Formula
         numpy_include = `#{python_exe} -c "import numpy; print(numpy.get_include())"`.strip
         cmake_args << "-DPython3_NumPy_INCLUDE_DIR=#{numpy_include}"
       end
-      if build.with?("sisco")
-        cmake_args << "-DBUILD_SISCO=#{build.with?("sisco") ? "ON" : "OFF"}"
-      end
+      cmake_args << "-DBUILD_SISCO=#{build.with?("sisco") ? "ON" : "OFF"}"
       system "cmake", "../..", *cmake_args
       system "make", "install"
     end
