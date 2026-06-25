@@ -6,22 +6,19 @@ class Casacore < Formula
   head "https://github.com/casacore/casacore.git"
 
   option "without-python", "Build without Python bindings"
-  option "without-sisco", "Build without Sisco compression storage manager"
 
   depends_on "cmake" => :build
-
   depends_on "casacore-data"
   depends_on "cfitsio"
   depends_on "fftw"
   depends_on "gcc" # for gfortran
   depends_on "gsl"
   depends_on "hdf5"
+  depends_on "libdeflate"
   depends_on "ncurses"
   depends_on "openblas"
   depends_on "readline"
   depends_on "wcslib"
-
-  depends_on "libdeflate" => :optional
 
   if build.with?("python")
     depends_on "python3"
@@ -49,7 +46,6 @@ class Casacore < Formula
         numpy_include = `#{python_exe} -c "import numpy; print(numpy.get_include())"`.strip
         cmake_args << "-DPython3_NumPy_INCLUDE_DIR=#{numpy_include}"
       end
-      cmake_args << "-DBUILD_SISCO=#{build.with?("sisco") ? "ON" : "OFF"}"
       system "cmake", "../..", *cmake_args
       system "make", "install"
     end
